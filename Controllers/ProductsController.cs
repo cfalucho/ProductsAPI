@@ -12,7 +12,6 @@ namespace ProductsAPI.Controllers
     {
         //GET - Retrieve data
         // api/products
-        [HttpGet]
         public IHttpActionResult GetAllProducts()
         {
             IList<ProductViewModel> products = null;
@@ -37,21 +36,43 @@ namespace ProductsAPI.Controllers
         //POST - Insert new record
         public IHttpActionResult PostNewProducts(ProductViewModel products)
         {
-            if (!ModelState.IsValid)
-                return BadRequest("Invalid Data");
-
-            using (var x = new ProductsDBContext())
+            try
             {
-                x.Products.Add(new Product()
-                {
-                    ProductName = products.ProductName,
-                    ProductDescription = products.ProductDescription,
-                    Price = products.Price,
-                    Featured = products.Featured
-                });
+                if (!ModelState.IsValid)
+                    return BadRequest("Invalid Data");
 
-                x.SaveChanges();
+                using (var x = new ProductsDBContext())
+                {
+                    x.Products.Add(new Product()
+                    {
+                        ProductName = products.ProductName,
+                        ProductDescription = products.ProductDescription,
+                        Price = products.Price,
+                        Featured = products.Featured
+                    });
+
+                    x.SaveChanges();
+                }
             }
+            catch (System.Data.Entity.Validation.DbEntityValidationException dbEx)
+            {
+                Exception raise = dbEx;
+                foreach (var validationErrors in dbEx.EntityValidationErrors)
+                {
+                    foreach (var validationError in validationErrors.ValidationErrors)
+                    {
+                        string message = string.Format("{0}:{1}",
+                            validationErrors.Entry.Entity.ToString(),
+                            validationError.ErrorMessage);
+                        // raise a new exception nesting  
+                        // the current instance as InnerException  
+                        raise = new InvalidOperationException(message, raise);
+                    }
+                }
+                throw raise;
+            }
+
+      
 
             return Ok();
         }
@@ -84,7 +105,7 @@ namespace ProductsAPI.Controllers
         }
 
         //DELETE - Delete a record based on ID
-
+        //api/products?id=1
         public IHttpActionResult Delete(int id)
         {
             if (id <= 0)

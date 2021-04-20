@@ -87,3 +87,7 @@ C:\Users\cdfal\source\repos\ProductsAPI\obj\Debug\ProductsAPI.csproj.CopyComplet
 C:\Users\cdfal\source\repos\ProductsAPI\obj\Debug\ProductsAPI.dll
 C:\Users\cdfal\source\repos\ProductsAPI\obj\Debug\ProductsAPI.pdb
 C:\Users\cdfal\source\repos\ProductsAPI\obj\Debug\ProductsAPI.csprojAssemblyReference.cache
+C:\Users\cdfal\source\repos\ProductsAPI\bin\Microsoft.Configuration.ConfigurationBuilders.Base.dll
+C:\Users\cdfal\source\repos\ProductsAPI\bin\Microsoft.Configuration.ConfigurationBuilders.UserSecrets.dll
+C:\Users\cdfal\source\repos\ProductsAPI\bin\Microsoft.Configuration.ConfigurationBuilders.Base.xml
+C:\Users\cdfal\source\repos\ProductsAPI\bin\Microsoft.Configuration.ConfigurationBuilders.UserSecrets.xml
