@@ -33,6 +33,7 @@ namespace ProductsAPI.Controllers
             return Ok(products);
         }
 
+
         //POST - Insert new record
         public IHttpActionResult PostNewProducts(ProductViewModel products)
         {
@@ -105,7 +106,7 @@ namespace ProductsAPI.Controllers
         }
 
         //DELETE - Delete a record based on ID
-        //api/products?id=1
+        //api/products/1
         public IHttpActionResult Delete(int id)
         {
             if (id <= 0)
